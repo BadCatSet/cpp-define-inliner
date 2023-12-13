@@ -1,5 +1,6 @@
 from string import ascii_letters, digits
 
+
 VALID_CHARS = ascii_letters + digits + "_"
 
 
@@ -128,10 +129,3 @@ def convert(program: str):
     for define in defines:
         program = define.tune(program)
     return program
-
-
-if __name__ == "__main__":
-    with open("raw.cpp") as f:
-        data = f.read()
-    data = convert(data)
-    print(data)

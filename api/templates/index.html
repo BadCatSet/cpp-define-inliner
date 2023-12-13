@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Убираю Дефайны</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 30px;
+            background-color: #000;
+            color: #fff;
+            font-family: monospace;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: orange;
+        }
+
+        a:hover {
+            color: red;
+        }
+
+        textarea {
+            background-color: rgb(10, 10, 10);
+            color: white;
+
+            border: white 1px solid;
+            font-size: 1.25rem;
+
+            min-width: 80vw;
+        }
+
+        button {
+            background-color: darkorange;
+            color: white;
+            border: orange 1px solid;
+            margin: 5px;
+            font-size: 3em;
+
+            font-family: inherit;
+        }
+
+        button:hover {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>
+        Это сайт для убирания дефайнов,
+    </h1>
+    <h1>
+        Позже я встрою этот функционал в свое расширение для браузера, которое улучшает работу algocode
+    </h1>
+    <h2>
+        tg: @leonid_kostarev
+    </h2>
+    <h2>
+        Проект полностью опенсорсный
+        <a href="https://github.com/BadCatSet/cpp-define-inliner">гитхаб</a>
+    </h2>
+    <br>
+
+
+    <button id="sender" type="button">Заинлайнить!</button>
+    <br>
+
+    <label for="inp"></label>
+    <textarea id="inp" rows="100" placeholder="Твой код"></textarea>
+
+    <script>
+        // для людей которые мне захотят предъявить, что я все в одном файле написал
+        // меня не колышет
+        const sender = document.getElementById("sender");
+        const inp = document.getElementById("inp");
+
+        sender.addEventListener("click", async () => {
+            const data = inp.value;
+            const response = await fetch("/api", {
+                method: "POST",
+                body:   data,
+            });
+            inp.value = await response.text();
+        });
+    </script>
+</body>
+</html>
