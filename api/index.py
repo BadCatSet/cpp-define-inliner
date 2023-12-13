@@ -12,7 +12,8 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/", methods=["POST"])
+# for checking if server is up
+@app.route("/sanity", methods=["GET", "POST"])
 def index_post():
     return "Hi mom!"
 

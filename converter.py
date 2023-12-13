@@ -1,7 +1,7 @@
 from string import ascii_letters, digits
 
-
 VALID_CHARS = ascii_letters + digits + "_"
+VALID_CHARS += "абвгдеёжзиийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
 
 
 class Define:
@@ -15,6 +15,11 @@ class Define:
         self.name = ""
         self.arguments = []
         self.body = ""
+        self.empty = False
+
+        if all(x in VALID_CHARS for x in raw):
+            self.empty = True
+            return
 
         for i in range(len(raw)):
             if raw[i] not in VALID_CHARS:
@@ -115,16 +120,19 @@ def convert(program: str):
         str: The converted c++ program.
     """
     defines = []
-
+    look_from = 0
     while True:
-        pos = program.find("#define")
+        pos = program.find("#define", look_from)
         if pos == -1:
             break
         end_pos = program.find("\n", pos)
 
-        defines.append(Define(program[pos:end_pos]))
-
-        program = program[:pos] + program[end_pos + 1:]
+        define = Define(program[pos:end_pos])
+        if not define.empty:
+            defines.append(define)
+            program = program[:pos] + program[end_pos + 1:]
+        else:
+            look_from = end_pos
 
     for define in defines:
         program = define.tune(program)
