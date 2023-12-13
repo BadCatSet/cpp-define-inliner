@@ -10,6 +10,11 @@ def index():
     return 'Hello from Flask!'
 
 
+@app.route('/', methods=['POST'])
+def index_post():
+    return "Hi mom!"
+
+
 @app.route('/api', methods=['POST'])
 def api():
     try:
