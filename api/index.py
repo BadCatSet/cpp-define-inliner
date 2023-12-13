@@ -18,4 +18,3 @@ def api():
         return data
     except Exception as e:
         return str(e)
-
