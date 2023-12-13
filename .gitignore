@@ -1,4 +1,4 @@
 .vercel
 .idea
 .venv
-./raw.cpp
+raw.cpp
