@@ -19,5 +19,3 @@ def api():
     except Exception as e:
         return str(e)
 
-
-app.run(host='0.0.0.0', port=81)
